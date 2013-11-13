@@ -1,8 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Hello! This is a Django Hello World Project.</h3>
+<h3>42 Coffee Cups Test Assignment</h3>
 
-<p>You can now go to  <a href="{% url admin:index %}">admin interface</a> and change admin pasword</p>
-<p>Currently next users are registered: {% for user in users %}{{ user.username }} {% endfor %}</p>
+{% for owner in owners %}
+<table border="1" bordercolor="#FFFFFF" style="background-color:#FFFFFF" width="100%" cellpadding="3" cellspacing="0">
+	<tr>
+		<td>Name: {{ owner.first_name }}</td>
+		<td>Contacts: {{ owner.contacts }}</td>
+	</tr>
+	<tr>
+		<td>Last name: {{ owner.last_name }}</td>
+		<td>Email:: {{ owner.email }}</td>
+	</tr>
+	<tr>
+		<td>Date of birth: {{ owner.date_of_birth|date:"d M Y" }}</td>
+		<td>Jabber: {{ owner.jabber }}</td>
+	</tr>
+	<tr>
+		<td> </td>
+		<td>Skype: {{ owner.skype }}</td>
+	</tr>
+	<tr>
+		<td>Bio:<br />{{ owner.bio }}</td>
+		<td>Other contacts: <br />{{ owner.other_contacts }}</td>
+	</tr>
+</table>
+{% endfor %}
 {% endblock content %}
