@@ -16,5 +16,20 @@
             "email": "admin@example.com", 
             "date_joined": "2011-08-19 09:53:08"
         }
+    },
+    {
+        "pk": 1,
+        "model": "hello.owner",
+        "fields": {
+            "bio": "Something about me",
+            "first_name": "Yuri",
+            "last_name": "Garmash",
+            "contacts": "Lutsk city",
+            "other_contacts": "someone I know\r\nsomeone I do not know\r\nsomeone else",
+            "date_of_birth": "1984-05-12",
+            "skype": "garmon1",
+            "jabber": "garmoncheg1@42cc.co",
+            "email": "gar@gar.com"
+        }
     }
 ]
