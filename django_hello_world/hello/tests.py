@@ -19,9 +19,20 @@ class SimpleTest(TestCase):
         self.assertEqual(1 + 1, 2)
 
 
-class HttpTest(TestCase):
+class HelloTest(TestCase):
+    fixtures = ['initial_data.json']
+
     def test_home(self):
+        """App renders proper template and database data"""
         c = Client()
         response = c.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, 'Hello!')
+        self.assertContains(response, '42 Coffee Cups Test Assignment')
+        self.assertContains(response, 'Name')
+        self.assertContains(response, 'Last name')
+        self.assertContains(response, 'Date of birth')
+        # Fixtures are rendered in the template/view
+        self.assertContains(response, 'Yuri')
+        self.assertContains(response, 'Lutsk city')
+        self.assertContains(response, 'garmon1')
+
