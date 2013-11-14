@@ -31,5 +31,7 @@
 		<td>Other contacts: <br />{{ owner.other_contacts|linebreaksbr }}</td>
 	</tr>
 </table>
+<hr />
+<a href="{% url latest_requests %}">requests</a>
 {% endfor %}
 {% endblock content %}

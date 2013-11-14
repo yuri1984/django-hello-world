@@ -8,6 +8,7 @@ Replace this with more appropriate tests for your application.
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from models import Owner
+from request.models import Request
 
 
 class SimpleTest(TestCase):
@@ -35,3 +36,9 @@ class HelloTest(TestCase):
         self.assertContains(response, owner.skype)
         self.assertContains(response, owner.jabber)
 
+    def test_requests(self):
+        self.client.get(reverse('home'))
+        response = self.client.get(reverse('latest_requests'))
+        latest_request = Request.objects.get(pk=1)
+        self.assertContains(response, 'back')
+        self.assertContains(response, latest_request)

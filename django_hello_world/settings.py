@@ -94,11 +94,16 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+# Note about Request middleware:
+# Add request.middleware.RequestMiddleware to MIDDLEWARE_CLASSES. If you use django.contrib.auth,
+# place the RequestMiddleware after it. If you use django.contrib.flatpages place request.middleware.RequestMiddleware
+# before it else flatpages will be marked as error pages in the admin panel.
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'request.middleware.RequestMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
@@ -124,6 +129,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django_hello_world.hello',
     'south',
+    'request',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -148,3 +154,9 @@ LOGGING = {
         },
     }
 }
+
+# Support for developer specific settings
+try:
+    from local_settings import *
+except ImportError:
+    pass

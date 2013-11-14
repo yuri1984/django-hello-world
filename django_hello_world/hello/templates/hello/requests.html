@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url home %}">< back</a>
+    <br />
+    {% for request in requests %}
+    <p>{{ request }}</p>
+    {% endfor %}
+{% endblock content %}
