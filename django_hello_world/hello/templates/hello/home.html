@@ -27,8 +27,8 @@
 		<td>Skype: {{ owner.skype }}</td>
 	</tr>
 	<tr>
-		<td>Bio:<br />{{ owner.bio }}</td>
-		<td>Other contacts: <br />{{ owner.other_contacts }}</td>
+		<td>Bio:<br />{{ owner.bio|linebreaksbr }}</td>
+		<td>Other contacts: <br />{{ owner.other_contacts|linebreaksbr }}</td>
 	</tr>
 </table>
 {% endfor %}
