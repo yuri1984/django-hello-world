@@ -7,6 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from models import Owner
 
 
 class SimpleTest(TestCase):
@@ -29,7 +30,8 @@ class HelloTest(TestCase):
         self.assertContains(response, 'Last name')
         self.assertContains(response, 'Date of birth')
         # Fixtures are rendered in the template/view
-        self.assertContains(response, 'Yuri')
-        self.assertContains(response, 'Lutsk city')
-        self.assertContains(response, 'garmon1')
+        owner = Owner.objects.get(pk=1)
+        self.assertContains(response, owner.first_name)
+        self.assertContains(response, owner.skype)
+        self.assertContains(response, owner.jabber)
 
