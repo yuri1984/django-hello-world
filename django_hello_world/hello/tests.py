@@ -7,8 +7,6 @@ Replace this with more appropriate tests for your application.
 
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from django.test.client import Client
-
 
 
 class SimpleTest(TestCase):
@@ -24,8 +22,7 @@ class HelloTest(TestCase):
 
     def test_home(self):
         """App renders proper template and database data"""
-        c = Client()
-        response = c.get(reverse('home'))
+        response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '42 Coffee Cups Test Assignment')
         self.assertContains(response, 'Name')

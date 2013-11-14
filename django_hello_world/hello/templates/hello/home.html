@@ -1,10 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link href="{% get_static_prefix %}home_main.css" rel="stylesheet" />
+{% endblock head %}
 
 {% block content %}
 <h3>42 Coffee Cups Test Assignment</h3>
 
 {% for owner in owners %}
-<table border="1" bordercolor="#FFFFFF" style="background-color:#FFFFFF" width="100%" cellpadding="3" cellspacing="0">
+<table class="owner_table">
 	<tr>
 		<td>Name: {{ owner.first_name }}</td>
 		<td>Contacts: {{ owner.contacts }}</td>
