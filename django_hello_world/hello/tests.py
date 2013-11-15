@@ -45,3 +45,13 @@ class HelloTest(TestCase):
         self.assertContains(response, 'back')
         self.assertContains(response, latest_request)
         self.assertNotContains(response, wrong_request)
+
+    def test_context_processor(self):
+        response = self.client.get(reverse('home'))
+        cp_in = False
+        for d in response.context[0]:
+            if 'django_settings' in d:
+                cp_in = True
+                break
+        if not cp_in:
+            raise AssertionError('django_settings context processor is not present in context')
