@@ -94,6 +94,11 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.static',
+    'context_processors.django_settings',
+)
+
 # Note about Request middleware:
 # Add request.middleware.RequestMiddleware to MIDDLEWARE_CLASSES. If you use django.contrib.auth,
 # place the RequestMiddleware after it. If you use django.contrib.flatpages place request.middleware.RequestMiddleware
