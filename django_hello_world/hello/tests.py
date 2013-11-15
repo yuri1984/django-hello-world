@@ -37,8 +37,11 @@ class HelloTest(TestCase):
         self.assertContains(response, owner.jabber)
 
     def test_requests(self):
-        self.client.get(reverse('home'))
+        for i in range(11):
+            self.client.get(reverse('home'))
         response = self.client.get(reverse('latest_requests'))
-        latest_request = Request.objects.get(pk=1)
+        latest_request = Request.objects.get(pk=11)
+        wrong_request = Request.objects.get(pk=1)
         self.assertContains(response, 'back')
         self.assertContains(response, latest_request)
+        self.assertNotContains(response, wrong_request)
