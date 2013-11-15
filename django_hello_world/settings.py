@@ -96,7 +96,7 @@ TEMPLATE_LOADERS = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
-    'context_processors.django_settings',
+    'django_hello_world.context_processors.django_settings',
 )
 
 # Note about Request middleware:
