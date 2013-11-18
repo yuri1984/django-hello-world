@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+    <link href="{% get_static_prefix %}home_main.css" rel="stylesheet" />
+{% endblock head %}
+
+{% block content %}
+<h3>42 Coffee Cups Test Assignment</h3>
+{% if owners %}
+    {% include 'hello/home.html' %}
+{% endif %}
+{% if form %}
+    {% include 'hello/edit.html' %}
+{% endif %}
+<hr />
+<a href="{% url latest_requests %}">requests</a>
+{% endblock content %}
