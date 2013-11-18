@@ -13,6 +13,11 @@
 	<tr>
 		<td>Name: {{ owner.first_name }}</td>
 		<td>Contacts: {{ owner.contacts }}</td>
+        <td>
+            {% if not request.user.is_authenticated %}
+            <a href="{% url django.contrib.auth.views.login %}">Login ></a>
+            {% endif %}
+        </td>
 	</tr>
 	<tr>
 		<td>Last name: {{ owner.last_name }}</td>

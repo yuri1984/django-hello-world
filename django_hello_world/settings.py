@@ -100,6 +100,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
     'django.core.context_processors.static',
+    'django.core.context_processors.request',  # For login form usage
     'django_hello_world.context_processors.django_settings',
 )
 
@@ -140,6 +141,8 @@ INSTALLED_APPS = (
     'south',
     'request',
 )
+
+LOGIN_REDIRECT_URL = '/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
