@@ -7,6 +7,7 @@ Replace this with more appropriate tests for your application.
 
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+
 from models import Owner
 from request.models import Request
 
@@ -21,6 +22,10 @@ class SimpleTest(TestCase):
 
 class HelloTest(TestCase):
     fixtures = ['initial_data.json']
+
+    def setUp(self):
+        self.test_username = 'admin'
+        self.test_password = 'admin'
 
     def test_home(self):
         """App renders proper template and database data"""
@@ -55,3 +60,10 @@ class HelloTest(TestCase):
                 break
         if not cp_in:
             raise AssertionError('django_settings context processor is not present in context')
+
+    def test_login(self):
+        response = self.client.get(reverse('home'))
+        self.assertContains(response, 'login')
+        self.client.login(username=self.test_username, password=self.test_password)
+        response = self.client.get(reverse('home'))
+        self.assertNotContains(response, 'login')
