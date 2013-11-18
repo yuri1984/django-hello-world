@@ -67,3 +67,17 @@ class HelloTest(TestCase):
         self.client.login(username=self.test_username, password=self.test_password)
         response = self.client.get(reverse('home'))
         self.assertNotContains(response, 'login')
+        self.assertContains(response, 'Edit')
+
+    def test_edit_page(self):
+        changed_skype = 'fancy_skype_username'
+        self.client.login(username=self.test_username, password=self.test_password)
+        # we should have at leaset 1 Owner in fixtures
+        owner = Owner.objects.filter()[0]
+        user_input = owner.__dict__.copy()
+        user_input['skype'] = changed_skype
+        response = self.client.post(reverse('edit_home'), user_input)
+        self.assertContains(response, changed_skype)
+        response = self.client.get(reverse('home'))
+        self.assertContains(response, changed_skype)
+
