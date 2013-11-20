@@ -52,6 +52,8 @@ class HelloTest(TestCase):
         for d in response.context[0]:
             if 'django_settings' in d:
                 cp_in = True
+                if not 'DATABAES' in d['django_settings']:
+                    raise AssertionError('django.settings, provided by context processeor are not django settings')
                 break
         if not cp_in:
             raise AssertionError('django_settings context processor is not present in context')
