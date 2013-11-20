@@ -5,19 +5,14 @@ when you run "manage.py test".
 Replace this with more appropriate tests for your application.
 """
 
+import os
+
 from django.core.urlresolvers import reverse
 from django.test import TestCase
+from django.conf import settings
 
 from models import Owner
 from request.models import Request
-
-
-class SimpleTest(TestCase):
-    def test_basic_addition(self):
-        """
-        Tests that 1 + 1 always equals 2.
-        """
-        self.assertEqual(1 + 1, 2)
 
 
 class HelloTest(TestCase):
@@ -69,15 +64,25 @@ class HelloTest(TestCase):
         self.assertNotContains(response, 'login')
         self.assertContains(response, 'Edit')
 
-    def test_edit_page(self):
+    def test_edit_page_login(self):
+        testfile = os.path.join(settings.FIXTURE_DIRS[0], 'testdata', 'tf1.png')
         changed_skype = 'fancy_skype_username'
-        self.client.login(username=self.test_username, password=self.test_password)
-        # we should have at leaset 1 Owner in fixtures
+        file_present_string = 'pictures/tf1'
+        with open(testfile, 'r') as tf:
+            self.client.login(username=self.test_username, password=self.test_password)
+            # we should have at leaset 1 Owner in fixtures
+            owner = Owner.objects.filter()[0]
+            user_input = owner.__dict__.copy()
+            user_input['skype'] = changed_skype
+            user_input['photo'] = tf
+            response = self.client.post(reverse('edit_home'), user_input)
+            self.assertContains(response, changed_skype)
+            response = self.client.get(reverse('home'))
+            self.assertContains(response, file_present_string)
+            print response
+        # Get Owner object again to ensure file is stored there.
         owner = Owner.objects.filter()[0]
-        user_input = owner.__dict__.copy()
-        user_input['skype'] = changed_skype
-        response = self.client.post(reverse('edit_home'), user_input)
-        self.assertContains(response, changed_skype)
-        response = self.client.get(reverse('home'))
-        self.assertContains(response, changed_skype)
+        if not file_present_string in owner.photo.name:
+            raise AssertionError('Owner model does not contain uploaded file')
+
 

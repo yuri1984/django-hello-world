@@ -84,6 +84,10 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+FIXTURE_DIRS = (
+   os.path.join(PROJECT_PATH, 'fixtures'),  # Required in tests
+)
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'j0ee6taz(y5dqbfp3)dh*+7as@pbs_w25%arj4-ds#j5%zf!nj'
 
