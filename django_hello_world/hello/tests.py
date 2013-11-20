@@ -52,7 +52,7 @@ class HelloTest(TestCase):
         for d in response.context[0]:
             if 'django_settings' in d:
                 cp_in = True
-                if not 'DATABAES' in d['django_settings']:
+                if not hasattr(d['django_settings'], 'DATABASES'):
                     raise AssertionError('django.settings, provided by context processeor are not django settings')
                 break
         if not cp_in:
