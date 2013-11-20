@@ -91,3 +91,9 @@ class HelloTest(TestCase):
         response = self.client.get(reverse('edit_home'))
         self.assertContains(response, 'vDateField')  # Widget specific string
 
+    def test_admin_edit_tag(self):
+        self.client.login(username=self.test_username, password=self.test_password)
+        response = self.client.get(reverse('home'))
+        self.assertContains(response, '(admin)')  # Tag specific string
+        self.assertContains(response, '/admin/hello/owner/1/')  # Tag url rendered
+
