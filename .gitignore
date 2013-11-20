@@ -2,3 +2,4 @@
 *.sqlite3
 django_hello_world/local_settings.py
 media/*
+media/pictures/*
