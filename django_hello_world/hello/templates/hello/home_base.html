@@ -1,7 +1,21 @@
 {% extends "base.html" %}
-{% load static %}
+{% load i18n admin_modify adminmedia static %}
 
 {% block head %}
+    {% if form %}
+    <script type="text/javascript">
+        window.__admin_media_prefix__ = "{% filter escapejs %}{% admin_media_prefix %}{% endfilter %}";
+    </script>
+    <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/base.css" />
+    <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/widgets.css" />
+    <script type="text/javascript" src="{% admin_media_prefix %}js/jquery.min.js"></script>
+    <script type="text/javascript" src="/admin/jsi18n/"></script>
+    <script type="text/javascript" src="{% admin_media_prefix %}js/core.js"></script>
+    <script type="text/javascript" src="{% admin_media_prefix %}js/admin/RelatedObjectLookups.js">        </script>
+    <script type="text/javascript" src="{% admin_media_prefix %}js/jquery.init.js"></script>
+    <script type="text/javascript" src="{% admin_media_prefix %}js/actions.min.js"></script>
+    {{ form.media }}
+    {% endif %}
     <link href="{% get_static_prefix %}home_main.css" rel="stylesheet" />
 {% endblock head %}
 
