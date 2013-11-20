@@ -12,4 +12,5 @@ class Owner(models.Model):
     jabber = models.EmailField()
     skype = models.CharField(max_length=30)
     other_contacts = models.TextField()
+    photo = models.ImageField(upload_to='pictures', null=True)
 

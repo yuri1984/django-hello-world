@@ -4,3 +4,36 @@
     border: 1px solid #FFFFFF;
     width: 100%;
 }
+
+img.owner_photo {
+    max-width: 200px;
+    max-height: 200px;
+    position: relative;
+}
+
+.UNIT {
+    width: 108px;
+    height: 18px;
+    border: none;
+    position: relative;
+    overflow: visible;
+    cursor: auto;
+    margin-top: 1px;
+    margin-left: 1px;
+    z-index: 1000;
+}
+
+#edit_owner input[type=text] {
+    background-color: rgb(245, 240, 245);
+    width: 106px;
+    height: 14px;
+    border: 1px solid rgb(153, 153, 153);
+}
+
+#edit_owner textarea {
+    margin: 0;
+    background-color: rgb(245, 240, 245);
+    width: 242px;
+    height: 112px;
+    border: 1px solid rgb(153, 153, 153);
+}

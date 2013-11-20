@@ -1,6 +1,52 @@
-<form method="post" action="{% url edit_home %}">
+<form id="edit_owner" method="post" action="{% url edit_home %}" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save" />
-    <a href="{% url home %}">Cancel</a>
+
+    <table class="owner_table">
+        <tr>
+            {% include "hello/form_field.html" with field=form.first_name %}
+            {% include "hello/form_field.html" with field=form.email %}
+        </tr>
+        <tr>
+            {% include "hello/form_field.html" with field=form.last_name %}
+            {% include "hello/form_field.html" with field=form.jabber %}
+        </tr>
+        <tr>
+            {% include "hello/form_field.html" with field=form.date_of_birth %}
+            {% include "hello/form_field.html" with field=form.skype %}
+        </tr>
+        <tr>
+
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            {{ form.photo.errors }}
+                            {{ form.photo.label_tag }}<br />
+                            {{ form.photo }}
+                        </td>
+                    </tr>
+                    {% if form.initial.photo %}
+                    <tr>
+                        <td>
+                            <img class="owner_photo" src="{{ MEDIA_URL }}{{ form.initial.photo.name }}" />
+                        </td>
+                    </tr>
+                    {% endif %}
+                </table>
+            </td>
+            <td>
+                <table>
+                    <tr>{% include "hello/form_field.html" with field=form.contacts %}</tr>
+                    <tr>{% include "hello/form_field_textarea.html" with field=form.other_contacts %}</tr>
+                    <tr>{% include "hello/form_field_textarea.html" with field=form.bio %}</tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Save" />
+                <a href="{% url home %}">Cancel</a>
+            </td>
+        </tr>
+    </table>
 </form>
