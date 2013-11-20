@@ -86,4 +86,8 @@ class HelloTest(TestCase):
         if not file_present_string in owner.photo.name:
             raise AssertionError('Owner model does not contain uploaded file')
 
+    def test_edit_form_date_widget(self):
+        self.client.login(username=self.test_username, password=self.test_password)
+        response = self.client.get(reverse('edit_home'))
+        self.assertContains(response, 'vDateField')  # Widget specific string
 
