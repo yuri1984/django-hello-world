@@ -81,7 +81,6 @@ class HelloTest(TestCase):
             self.assertContains(response, changed_skype)
             response = self.client.get(reverse('home'))
             self.assertContains(response, file_present_string)
-            print response
         # Get Owner object again to ensure file is stored there.
         owner = Owner.objects.filter()[0]
         if not file_present_string in owner.photo.name:
