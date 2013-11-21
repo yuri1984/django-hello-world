@@ -79,7 +79,9 @@ class HelloTest(TestCase):
             self.assertContains(response, changed_skype)
             response = self.client.get(reverse('home'))
             self.assertContains(response, file_present_string)
-            print response
+            user_input['skype'] = ''
+            response = self.client.post(reverse('edit_home'), user_input)
+            self.assertContains(response, 'This field is required')
         # Get Owner object again to ensure file is stored there.
         owner = Owner.objects.filter()[0]
         if not file_present_string in owner.photo.name:
