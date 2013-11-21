@@ -1,4 +1,4 @@
 <td>
-    {{ field.errors }}
+    {% for error in field.errors %}<span class="edit_form_error textarea">{{ error }}</span><br />{% endfor %}
     {{ field.label_tag }}: <br />{{ field }}
 </td>

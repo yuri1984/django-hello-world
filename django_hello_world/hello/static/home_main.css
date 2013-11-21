@@ -2,7 +2,8 @@
 
 .owner_table {
     border: 1px solid #FFFFFF;
-    width: 100%;
+    top:50%;
+    left:50%;
 }
 
 img.owner_photo {
@@ -12,7 +13,7 @@ img.owner_photo {
 }
 
 .UNIT {
-    width: 108px;
+    width: 250px;
     height: 18px;
     border: none;
     position: relative;
@@ -36,4 +37,18 @@ img.owner_photo {
     width: 242px;
     height: 112px;
     border: 1px solid rgb(153, 153, 153);
+}
+
+.edit_form_error {
+    font-size: 12px !important;
+    padding: 4px 5px 4px 27px;
+    margin: 0 0 3px 0;
+    border: 1px solid red;
+    color: white;
+    background: red;
+}
+
+.edit_form_error.textarea{
+    padding: 4px 5px 2px 27px;
+    margin: 0 0 10px 0;
 }
