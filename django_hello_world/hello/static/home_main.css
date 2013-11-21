@@ -2,7 +2,8 @@
 
 .owner_table {
     border: 1px solid #FFFFFF;
-    width: 100%;
+    top:50%;
+    left:50%;
 }
 
 img.owner_photo {
@@ -12,7 +13,7 @@ img.owner_photo {
 }
 
 .UNIT {
-    width: 108px;
+    width: 250px;
     height: 18px;
     border: none;
     position: relative;
