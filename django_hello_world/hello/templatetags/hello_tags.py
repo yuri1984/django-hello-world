@@ -27,7 +27,5 @@ class EditLinkNode(template.Node):
         return u'<a href="%s">(admin)</a>' % url
 
     def render(self, context):
-        print self.tp_object
         real_object = self.tp_object.resolve(context)
-        print self.url_to_edit_object(real_object)
         return self.url_to_edit_object(real_object)
