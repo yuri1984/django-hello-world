@@ -1,0 +1,23 @@
+# Those are example local settings for debug purposes.
+# Rename them into local_settings.py and be sure they are in the same directory as your
+# project's main settings.py
+# Each setting set here overrides root settings.py parameter.
+
+STATIC_URL = '/static/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
+    # Uncomment the next line to enable admin documentation:
+    'django.contrib.admindocs',
+    'hello',
+    'south',
+    'request',
+)
