@@ -2,12 +2,15 @@ from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
+from hello.views import *
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^$', 'django_hello_world.hello.views.home', name='home'),
-    url(r'^requests/$', 'django_hello_world.hello.views.latest_requests', name='latest_requests'),
-    url(r'^edit/$', 'django_hello_world.hello.views.edit_home', name='edit_home'),
+    url(r'^$', home, name='home'),
+    url(r'^requests/$', latest_requests, name='latest_requests'),
+    url(r'^edit/$', edit_home, name='edit_home'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
