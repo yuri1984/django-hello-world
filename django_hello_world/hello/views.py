@@ -19,13 +19,13 @@ def latest_requests(request):
 @render_to('hello/home_base.html')
 def edit_home(request):
     owners = Owner.objects.filter()
-    if owners.count() > 0:
+    if owners.exists():
         owner = owners[0]
         form = EditOwner(instance=owner)
     else:
         form = EditOwner()
     if request.POST:
-        if owners.count() > 0:
+        if owners.exists():
             # Editing of owner existign data
             form = EditOwner(request.POST, request.FILES, instance=owners[0])
         else:
