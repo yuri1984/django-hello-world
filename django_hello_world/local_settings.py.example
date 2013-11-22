@@ -21,3 +21,5 @@ INSTALLED_APPS = (
     'south',
     'request',
 )
+
+LOCAL_TESTS = True

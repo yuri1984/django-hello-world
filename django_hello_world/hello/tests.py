@@ -17,6 +17,7 @@ from django.core.management import call_command
 from models import Owner
 from models import ModelsLog
 from request.models import Request
+from django.conf import settings
 
 
 class HelloTest(TestCase):
@@ -115,14 +116,13 @@ class HelloTest(TestCase):
         sys.stderr = cStringIO.StringIO()
         sys.stdout = cStringIO.StringIO()
         call_command('modelcount', [], {})
-        data = sys.stdout.getvalue()
         self.assertTrue('error: ' in sys.stderr.getvalue())
         self.assertTrue('Model:' in sys.stdout.getvalue())
-        # self.assertTrue('"owner", Instances: "1"' in sys.stdout.getvalue())
-        # self.assertTrue('"migration history", Instances: "3"' in sys.stdout.getvalue())
+        if settings.LOCAL_TESTS:
+            self.assertTrue('"owner", Instances: "1"' in sys.stdout.getvalue())
+            self.assertTrue('"migration history", Instances: "3"' in sys.stdout.getvalue())
         sys.stderr = old_stderr
         sys.stdout = old_stdout
-        print data
 
     def test_signals_processor(self):
         owners = Owner.objects.all()

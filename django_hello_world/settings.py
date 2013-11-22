@@ -171,6 +171,8 @@ LOGGING = {
     }
 }
 
+LOCAL_TESTS = False
+
 # Support for developer specific settings
 try:
     from local_settings import *
