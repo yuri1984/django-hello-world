@@ -6,10 +6,13 @@ Replace this with more appropriate tests for your application.
 """
 
 import os
+import cStringIO
+import sys
 
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.conf import settings
+from django.core.management import call_command
 
 from models import Owner
 from request.models import Request
@@ -97,3 +100,13 @@ class HelloTest(TestCase):
         self.assertContains(response, '(admin)')  # Tag specific string
         self.assertContains(response, '/admin/hello/owner/1/')  # Tag url rendered
 
+    def test_management_command_models_count(self):
+        old_stderr = sys.stderr
+        old_stdout = sys.stdout
+        sys.stderr = cStringIO.StringIO()
+        sys.stdout = cStringIO.StringIO()
+        call_command('modelcount', [], {})
+        self.assertTrue('error: ' in sys.stderr.getvalue())
+        self.assertTrue('Model: "owner", Instances: "1"' in sys.stdout.getvalue())
+        sys.stderr = old_stderr
+        sys.stdout = old_stdout
