@@ -15,6 +15,7 @@ from django.conf import settings
 from django.core.management import call_command
 
 from models import Owner
+from models import ModelsLog
 from request.models import Request
 
 
@@ -103,7 +104,7 @@ class HelloTest(TestCase):
         self.assertContains(response, '(admin)')  # Tag specific string
         self.assertContains(response, '/admin/hello/owner/1/')  # Tag url rendered
 
-    def test_management_command_models_count(self):
+    def test_z_management_command_models_count(self):
         old_stderr = sys.stderr
         old_stdout = sys.stdout
         sys.stderr = cStringIO.StringIO()
@@ -113,3 +114,19 @@ class HelloTest(TestCase):
         self.assertTrue('Model:' in sys.stdout.getvalue())
         sys.stderr = old_stderr
         sys.stdout = old_stdout
+
+    def test_signals_processor(self):
+        owners = Owner.objects.all()
+        logs_before = ModelsLog.objects.all().count()
+        owner = owners[0]
+        owner.pk += 1
+        owner.save()
+        logs_after = ModelsLog.objects.all().count()
+        self.assertTrue(logs_before < logs_after)
+        owner.delete()
+        logs_deleted = ModelsLog.objects.all().count()
+        self.assertTrue(logs_after < logs_deleted)
+        owner = owners[0]
+        owner.save()
+        logs_final = ModelsLog.objects.all().count()
+        self.assertTrue(logs_deleted < logs_final)
