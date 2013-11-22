@@ -17,12 +17,14 @@
                 beforeSubmit: function(form, options) {
                     // return false to cancel submit
                     $("#loading").show();
-                    $('#edit_form_submit').attr('disabled', 'disabled');
+                    $('textarea').attr('disabled', 'disabled');
+                    $('input').attr('disabled', 'disabled');
                 },
                 success: function() {
                     $('#loading').hide();
                     $("#form_ajax").show();
-                    $('#edit_form_submit').removeAttr('disabled');
+                    $('textarea').removeAttr('disabled');
+                    $('input').removeAttr('disabled');
                     setTimeout(function() {
                         $("#form_ajax").hide();
                     }, 5000);
@@ -30,7 +32,8 @@
                 error:  function() {
                     $('#loading').hide();
                     $("#form_ajax_error").show();
-                    $('#edit_form_submit').removeAttr('disabled');
+                    $('textarea').removeAttr('disabled');
+                    $('input').removeAttr('disabled');
                     setTimeout(function() {
                         $("#form_ajax_error").hide();
                     }, 5000);
