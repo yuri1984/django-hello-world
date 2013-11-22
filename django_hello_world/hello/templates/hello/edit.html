@@ -1,4 +1,4 @@
-<form id="edit_owner" method="post" action="{% url edit_home %}" enctype="multipart/form-data">
+<form id="edit_owner" method="post" action="{% url edit_ajax %}" enctype="multipart/form-data">
     {% csrf_token %}
 
     <table class="owner_table">
@@ -44,8 +44,12 @@
         </tr>
         <tr>
             <td>
-                <input type="submit" value="Save" />
-                <a href="{% url home %}">Cancel</a>
+                <input id="edit_form_submit" type="submit" value="Save" />
+                <a href="{% url home %}">Cancel</a>&nbsp;
+                <span id="form_ajax" style="display:none">Submit Success!</span>
+                <span id="form_ajax_error" style="display:none">Please correct errors in form!</span>
+                <span id="loading" style="display:none">Loading</span>
+                <br />
             </td>
         </tr>
     </table>

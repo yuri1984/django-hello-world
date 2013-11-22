@@ -8,12 +8,40 @@
     </script>
     <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/base.css" />
     <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/widgets.css" />
-    <script type="text/javascript" src="{% admin_media_prefix %}js/jquery.min.js"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}jquery.form.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // prepare Options Object
+            var options = {
+                beforeSubmit: function(form, options) {
+                    // return false to cancel submit
+                    $("#loading").show();
+                    $('#edit_form_submit').attr('disabled', 'disabled');
+                },
+                success: function() {
+                    $('#loading').hide();
+                    $("#form_ajax").show();
+                    $('#edit_form_submit').removeAttr('disabled');
+                    setTimeout(function() {
+                        $("#form_ajax").hide();
+                    }, 5000);
+                },
+                error:  function() {
+                    $('#loading').hide();
+                    $("#form_ajax_error").show();
+                    $('#edit_form_submit').removeAttr('disabled');
+                    setTimeout(function() {
+                        $("#form_ajax_error").hide();
+                    }, 5000);
+                }
+            };
+
+            $('#edit_owner').ajaxForm(options);
+        });
+    </script>
     <script type="text/javascript" src="/admin/jsi18n/"></script>
     <script type="text/javascript" src="{% admin_media_prefix %}js/core.js"></script>
-    <script type="text/javascript" src="{% admin_media_prefix %}js/admin/RelatedObjectLookups.js">        </script>
-    <script type="text/javascript" src="{% admin_media_prefix %}js/jquery.init.js"></script>
-    <script type="text/javascript" src="{% admin_media_prefix %}js/actions.min.js"></script>
     {{ form.media }}
     {% endif %}
     <link href="{% get_static_prefix %}home_main.css" rel="stylesheet" />

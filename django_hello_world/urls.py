@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^$', home, name='home'),
     url(r'^requests/$', latest_requests, name='latest_requests'),
     url(r'^edit/$', edit_home, name='edit_home'),
+    url(r'^edit_ajax/$', edit_home, {'ajax': True}, name='edit_ajax'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

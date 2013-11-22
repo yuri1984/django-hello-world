@@ -70,7 +70,7 @@ class HelloTest(TestCase):
         self.assertNotContains(response, 'login')
         self.assertContains(response, 'Edit')
 
-    def test_edit_page_login(self):
+    def test_edit_page_login_with_ajax(self):
         testfile = os.path.join(settings.FIXTURE_DIRS[0], 'testdata', 'tf1.png')
         changed_skype = 'fancy_skype_username'
         file_present_string = 'pictures/tf1'
@@ -83,11 +83,16 @@ class HelloTest(TestCase):
             user_input['photo'] = tf
             response = self.client.post(reverse('edit_home'), user_input)
             self.assertContains(response, changed_skype)
+            user_input['photo'] = ''
+            response = self.client.post(reverse('edit_ajax'), user_input)
+            self.assertContains(response, 'ok')
             response = self.client.get(reverse('home'))
             self.assertContains(response, file_present_string)
             user_input['skype'] = ''
             response = self.client.post(reverse('edit_home'), user_input)
             self.assertContains(response, 'This field is required')
+            response = self.client.post(reverse('edit_ajax'), user_input)
+            self.assertContains(response, 'Wrong', status_code=400)
         # Get Owner object again to ensure file is stored there.
         owner = Owner.objects.filter()[0]
         if not file_present_string in owner.photo.name:

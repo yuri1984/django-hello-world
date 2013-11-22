@@ -52,3 +52,7 @@ img.owner_photo {
     padding: 4px 5px 2px 27px;
     margin: 0 0 10px 0;
 }
+
+#form_ajax_error {
+    border: 1px solid red;
+}
