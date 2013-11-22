@@ -4,10 +4,11 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
-    url(r'^$', 'django_hello_world.hello.views.home', name='home'),
-    url(r'^requests/$', 'django_hello_world.hello.views.latest_requests', name='latest_requests'),
-    url(r'^edit/$', 'django_hello_world.hello.views.edit_home', name='edit_home'),
+    url(r'^$', 'hello.views.home', name='home'),
+    url(r'^requests/$', 'hello.views.latest_requests', name='latest_requests'),
+    url(r'^edit/$', 'hello.views.edit_home', name='edit_home'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
